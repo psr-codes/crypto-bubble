@@ -1,5 +1,66 @@
 import React, { useEffect, useState } from "react";
 import { data } from "@/constants/change_in_crypto";
+import ChartDrawer from "../components/ChartDrawer";
+
+import { Button } from "@/components/ui/button";
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from "@/components/ui/drawer";
+
+function DrawerDemo({ bubble }) {
+    return (
+        <Drawer>
+            <DrawerTrigger asChild>
+                <div
+                    key={bubble.id}
+                    className={`floating-bubble    transition-all duration-500 ease-in-out `}
+                    style={{
+                        top: bubble.top,
+                        left: bubble.left,
+                        backgroundColor:
+                            bubble.text[0] > 0
+                                ? "rgba(0, 255, 0, 0.3)"
+                                : "rgba(255, 0, 0, 0.3)",
+                        width: `${bubble.radius}px`,
+                        height: `${bubble.radius}px`,
+                        backdropFilter: "blur(10px)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        padding: "10px",
+                    }}
+                >
+                    <div className="flex-col justify-center items-center mx-auto">
+                        <p className="text-xs mx-auto">{bubble?.text[1]}</p>
+                        <p>{bubble?.text[0]}%</p>
+                    </div>
+                </div>
+            </DrawerTrigger>
+            <DrawerContent className="text-white">
+                <div className="mx-auto w-full max-w-sm">
+                    <DrawerHeader>
+                        <DrawerTitle>{bubble?.text[1]}</DrawerTitle>
+                        <DrawerDescription>
+                            <p>{bubble?.text[0]}%</p>
+                        </DrawerDescription>
+                    </DrawerHeader>
+
+                    <DrawerFooter>
+                        <Button>Submit</Button>
+                        <DrawerClose asChild>
+                            <Button variant="outline">Cancel</Button>
+                        </DrawerClose>
+                    </DrawerFooter>
+                </div>
+            </DrawerContent>
+        </Drawer>
+    );
+}
 
 const FloatingBubbles = ({ method }) => {
     const [coinArr, setCoinArr] = useState(data);
@@ -115,28 +176,7 @@ const FloatingBubbles = ({ method }) => {
     return (
         <div className="relative w-[100vw]  h-[85vh]">
             {bubbles.map((bubble) => (
-                <div
-                    key={bubble.id}
-                    className={`floating-bubble    transition-all duration-500 ease-in-out `}
-                    style={{
-                        top: bubble.top,
-                        left: bubble.left,
-                        backgroundColor:
-                            bubble.text[0] > 0
-                                ? "rgba(0, 255, 0, 0.3)"
-                                : "rgba(255, 0, 0, 0.3)",
-                        width: `${bubble.radius}px`,
-                        height: `${bubble.radius}px`,
-                        backdropFilter: "blur(10px)",
-                        border: "1px solid rgba(255, 255, 255, 0.5)",
-                        padding: "10px",
-                    }}
-                >
-                    <div className="flex-col justify-center items-center mx-auto">
-                        <p className="text-xs mx-auto">{bubble?.text[1]}</p>
-                        <p>{bubble?.text[0]}%</p>
-                    </div>
-                </div>
+                <DrawerDemo bubble={bubble} />
             ))}
         </div>
     );
