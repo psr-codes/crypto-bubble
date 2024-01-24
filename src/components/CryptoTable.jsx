@@ -46,7 +46,7 @@ const CryptoTable = () => {
                             className="   border-gray-700   hover:bg-gray-600"
                             key={index}
                         >
-                            <td className="w-4 p-4">1.</td>
+                            <td className="w-4 p-4">{index + 1}</td>
                             <th
                                 scope="row"
                                 className="px-6 py-4   whitespace-nowrap   text-white  font-semibold"
