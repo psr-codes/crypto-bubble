@@ -42,5 +42,6 @@ Artifical Intelligence
 URL(https://crypto-bubble.vercel.app/)  api Repp: (https://github.com/lytcode404/apis/tree/main)
 
 ## Output Images
-[Output1]("https://drive.google.com/file/d/1oE76V-zPeqHI1oAGEmo209yWCZ_jtjgU/view?usp=sharing")
-[Output2]( "https://drive.google.com/file/d/1GjJk_88LfyRHILXuWGLgpL9XFmC7w0ge/view?usp=sharing")
+Output1 :("https://drive.google.com/file/d/1oE76V-zPeqHI1oAGEmo209yWCZ_jtjgU/view?usp=sharing")
+
+Output2 :( "https://drive.google.com/file/d/1GjJk_88LfyRHILXuWGLgpL9XFmC7w0ge/view?usp=sharing")
