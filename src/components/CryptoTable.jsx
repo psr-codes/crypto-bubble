@@ -2,7 +2,7 @@ import React from "react";
 
 const CryptoTable = () => {
     return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-[85%] mx-auto">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-[85%] mx-auto z-999">
             <table className="w-full text-sm text-left rtl:text-right   text-white  font-semibold bg-[#1E2A31]  ">
                 <thead className="text-xs   uppercase bg-gray-700    text-white  font-semibold">
                     <tr>

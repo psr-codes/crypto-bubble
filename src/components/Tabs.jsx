@@ -1,30 +1,9 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const tabs = [
-    {
-        id: 1,
-        name: "Day",
-        value: "day",
-    },
-    {
-        id: 2,
-        name: "Week",
-        value: "week",
-    },
-    {
-        id: 3,
-        name: "Month",
-        value: "month",
-    },
-    {
-        id: 4,
-        name: "Year",
-        value: "year",
-    },
-];
-export default function TabsDemo() {
-    const [activeTab, setActiveTab] = useState("day");
+import { tabsData } from "@/constants/data";
+
+export default function TabsDemo({ activeTab, setActiveTab }) {
     const handleValueChange = (value) => {
         console.log(value);
         setActiveTab(value);
@@ -42,7 +21,7 @@ export default function TabsDemo() {
             }}
         >
             <TabsList className="grid w-full grid-cols-4 ">
-                {tabs.map((tab) => (
+                {tabsData.map((tab) => (
                     <TabsTrigger
                         value={tab.value}
                         key={tab.id}
