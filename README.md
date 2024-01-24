@@ -39,4 +39,4 @@ Pandas ,
 Next.js,
 Artifical Intelligence 
 ## Deployed Project Link
-URL(https://crypto-bubble.vercel.app/)
+URL(https://crypto-bubble.vercel.app/)  api Repp: (https://github.com/lytcode404/apis/tree/main)
