@@ -42,5 +42,5 @@ Artifical Intelligence
 URL(https://crypto-bubble.vercel.app/)  api Repp: (https://github.com/lytcode404/apis/tree/main)
 
 ## Output Images
-![Alt text]("C:\Users\Aftab\OneDrive\Pictures\Screenshots\Screenshot 2024-01-24 231305.png")
-![Alt text]("C:\Users\Aftab\OneDrive\Pictures\Screenshots\Screenshot 2024-01-24 231238.png")
+![Alt text](image "C:\Users\Aftab\OneDrive\Pictures\Screenshots\Screenshot 2024-01-24 231305.png")
+![Alt text](image "C:\Users\Aftab\OneDrive\Pictures\Screenshots\Screenshot 2024-01-24 231238.png")
