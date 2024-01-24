@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { data } from "@/constants/change_in_crypto";
 import ChartDrawer from "../components/ChartDrawer";
+import CandlestickPage from "@/components/Chart";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,9 +15,9 @@ import {
     DrawerTrigger,
 } from "@/components/ui/drawer";
 
-function DrawerDemo({ bubble }) {
+function DrawerDemo({ bubble, index }) {
     return (
-        <Drawer>
+        <Drawer key={index} className="">
             <DrawerTrigger asChild>
                 <div
                     key={bubble.id}
@@ -41,8 +42,8 @@ function DrawerDemo({ bubble }) {
                     </div>
                 </div>
             </DrawerTrigger>
-            <DrawerContent className="text-white">
-                <div className="mx-auto w-full max-w-sm">
+            <DrawerContent className="text-white bg-black  mx-auto opacity-85 flex justify-center items-center">
+                {/* <div className="mx-auto w-full max-w-sm">
                     <DrawerHeader>
                         <DrawerTitle>{bubble?.text[1]}</DrawerTitle>
                         <DrawerDescription>
@@ -56,7 +57,8 @@ function DrawerDemo({ bubble }) {
                             <Button variant="outline">Cancel</Button>
                         </DrawerClose>
                     </DrawerFooter>
-                </div>
+                </div> */}
+                <CandlestickPage />
             </DrawerContent>
         </Drawer>
     );
@@ -175,8 +177,8 @@ const FloatingBubbles = ({ method }) => {
     }, []);
     return (
         <div className="relative w-[100vw]  h-[85vh]">
-            {bubbles.map((bubble) => (
-                <DrawerDemo bubble={bubble} />
+            {bubbles.map((bubble, index) => (
+                <DrawerDemo bubble={bubble} index={index} />
             ))}
         </div>
     );

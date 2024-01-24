@@ -1,6 +1,7 @@
 import React from "react";
 import { stats } from "@/constants/crypto_stats";
 import { data } from "@/constants/change_in_crypto";
+
 const CryptoTable = () => {
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-[85%] mx-auto z-999">
@@ -62,7 +63,7 @@ const CryptoTable = () => {
                                 {item?.crypto_stats?.Volume}$
                             </td>
 
-                            {data?.map((i) => {
+                            {data?.map((i, index) => {
                                 if (i.coin_name === item.coin_name) {
                                     return (
                                         <td
@@ -71,6 +72,7 @@ const CryptoTable = () => {
                                                     ? "bg-red-500"
                                                     : "bg-green-500"
                                             }`}
+                                            key={index}
                                         >
                                             {i.change_year.toFixed(2)}%
                                         </td>
