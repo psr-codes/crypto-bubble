@@ -29,13 +29,13 @@ Access the platform at http://localhost:3000
 If you encounter any issues or have suggestions, please open an issue on the repository.
 
 ## Technologies Used:
-React.js
-Charting Libraries (D3.js or Chart.js)
-Bootstrap or Tailwind CSS
-WebSocket Technology
-RESTful APIs
-Machine Learning
-Pandas 
-Next.js
-Artifical Intelligence
+React.js , 
+Charting Libraries (D3.js or Chart.js),
+Bootstrap or Tailwind CSS ,
+WebSocket Technology ,
+RESTful APIs,
+Machine Learning ,
+Pandas ,
+Next.js,
+Artifical Intelligence 
 
