@@ -3,8 +3,6 @@ import Tabs from "../components/Tabs";
 import BubbleCloud from "../components/BubbleCloud";
 import CryptoTable from "../components/CryptoTable";
 
-import { tabsData } from "@/constants/data";
-
 export default function Home() {
     const [activeTab, setActiveTab] = useState("day");
 
@@ -12,11 +10,7 @@ export default function Home() {
         <main>
             <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
             <div className=" ">
-                <BubbleCloud
-                    method={
-                        tabsData.find((tab) => tab.value === activeTab).method
-                    }
-                />
+                <BubbleCloud method={activeTab} />
             </div>
             <CryptoTable />
         </main>

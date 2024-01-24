@@ -1,5 +1,6 @@
 import React from "react";
-
+import { stats } from "@/constants/crypto_stats";
+import { data } from "@/constants/change_in_crypto";
 const CryptoTable = () => {
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-[85%] mx-auto z-999">
@@ -22,9 +23,6 @@ const CryptoTable = () => {
                             24h Volume
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Hour
-                        </th>
-                        <th scope="col" className="px-6 py-3">
                             Day
                         </th>
                         <th scope="col" className="px-6 py-3">
@@ -36,27 +34,107 @@ const CryptoTable = () => {
                         <th scope="col" className="px-6 py-3">
                             Year
                         </th>
+                        <th scope="col" className="px-6 py-3">
+                            Circulating Supply
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className="   border-gray-700   hover:bg-gray-600">
-                        <td className="w-4 p-4">1.</td>
-                        <th
-                            scope="row"
-                            className="px-6 py-4   whitespace-nowrap   text-white  font-semibold"
+                    {stats?.map((item, index) => (
+                        <tr
+                            className="   border-gray-700   hover:bg-gray-600"
+                            key={index}
                         >
-                            Bitcoin
-                        </th>
+                            <td className="w-4 p-4">1.</td>
+                            <th
+                                scope="row"
+                                className="px-6 py-4   whitespace-nowrap   text-white  font-semibold"
+                            >
+                                {item.coin_name}
+                            </th>
+                            <td className="px-6 py-4">
+                                {item?.crypto_stats?.["Market Cap"]}$
+                            </td>
+                            <td className="px-6 py-4">
+                                {item?.crypto_stats?.Open}$
+                            </td>
+                            <td className="px-6 py-4">
+                                {item?.crypto_stats?.Volume}$
+                            </td>
 
-                        <td className="px-6 py-4">4554$</td>
-                        <td className="px-6 py-4">461655$</td>
-                        <td className="px-6 py-4">4856662$</td>
-                        <td className="px-6 py-4">+5.5%</td>
-                        <td className="px-6 py-4">+5.5%</td>
-                        <td className="px-6 py-4">+5.5%</td>
-                        <td className="px-6 py-4">+5.5%</td>
-                        <td className="px-6 py-4">+5.5%</td>
-                    </tr>
+                            {data?.map((i) => {
+                                if (i.coin_name === item.coin_name) {
+                                    return (
+                                        <td
+                                            className={`px-6 py-4 border-b ${
+                                                i.change_day >= 0 == 0
+                                                    ? "bg-red-500"
+                                                    : "bg-green-500"
+                                            }`}
+                                        >
+                                            {i.change_year.toFixed(2)}%
+                                        </td>
+                                    );
+                                } else {
+                                    return null;
+                                }
+                            })}
+                            {data?.map((i) => {
+                                if (i.coin_name === item.coin_name) {
+                                    return (
+                                        <td
+                                            className={`px-6 py-4 border-b ${
+                                                i.change_week >= 0 == 0
+                                                    ? "bg-red-500"
+                                                    : "bg-green-500"
+                                            }`}
+                                        >
+                                            {i.change_year.toFixed(2)}%
+                                        </td>
+                                    );
+                                } else {
+                                    return null;
+                                }
+                            })}
+                            {data?.map((i) => {
+                                if (i.coin_name === item.coin_name) {
+                                    return (
+                                        <td
+                                            className={`px-6 py-4 border-b ${
+                                                i.change_month >= 0 == 0
+                                                    ? "bg-red-500"
+                                                    : "bg-green-500"
+                                            }`}
+                                        >
+                                            {i.change_year.toFixed(2)}%
+                                        </td>
+                                    );
+                                } else {
+                                    return null;
+                                }
+                            })}
+                            {data?.map((i) => {
+                                if (i.coin_name === item.coin_name) {
+                                    return (
+                                        <td
+                                            className={`px-6 py-4 border-b ${
+                                                i.change_year >= 0 == 0
+                                                    ? "bg-red-500"
+                                                    : "bg-green-500"
+                                            }`}
+                                        >
+                                            {i.change_year.toFixed(2)}%
+                                        </td>
+                                    );
+                                } else {
+                                    return null;
+                                }
+                            })}
+                            <td className="px-6 py-4">
+                                {item?.crypto_stats?.["Circulating Supply"]}$
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

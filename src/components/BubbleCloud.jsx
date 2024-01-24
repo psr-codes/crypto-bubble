@@ -2,32 +2,43 @@ import React, { useEffect, useState } from "react";
 import { data } from "@/constants/change_in_crypto";
 
 const FloatingBubbles = ({ method }) => {
-    const sortedData = (data, method) => {
-        if (!["day", "week", "month", "year"].includes(method)) {
-            console.error(
-                "Invalid sortBy argument. Use 'day', 'week', 'month', or 'year'."
-            );
-            return data; // Return the original array if the argument is invalid
-        }
-
-        // Sort the array based on the provided sortBy argument
-        return data.sort((a, b) => {
-            const changeA = a[`change_${method}`];
-            const changeB = b[`change_${method}`];
-
+    const [coinArr, setCoinArr] = useState(data);
+    const [field, setField] = useState("change_day");
+    const sortedData = (data, field) => {
+        console.log("Sorting data...");
+        const sortedArray = data.slice().sort((a, b) => {
+            const changeA = a[field];
+            const changeB = b[field];
             return changeB - changeA; // Sorting in descending order
         });
+        console.log("Data sorted:", sortedArray);
+        return sortedArray;
     };
-    var coinArr = [];
-    useEffect(() => {
-        coinArr = sortedData(data, method);
-    }, []);
 
+    useEffect(() => {
+        if (!["day", "week", "month", "year"].includes(method)) {
+            console.error(
+                "Invalid sortBy argument. Use 'day', 'week', 'month', or 'year'.",
+                method
+            );
+            return;
+        }
+
+        setField(`change_${method}`);
+        console.log("method", method);
+    }, [method]);
+
+    useEffect(() => {
+        setCoinArr(sortedData(data, field));
+    }, [field]);
+
+    useEffect(() => {
+        console.log("coinArr", coinArr);
+    }, [coinArr]);
     // Example usage:
     // const sortedData = sortDataByChange(data, "day");
     var numberOfBubbles = 80;
 
-    // console.log("method is :0", method);
     const [bubbles, setBubbles] = useState([]);
     const scaleFactor = 200;
     var percentageFactor = 0;
@@ -38,14 +49,15 @@ const FloatingBubbles = ({ method }) => {
     };
 
     useEffect(() => {
-        const changes = coinArr.map((entry) => entry[method]);
+        if (!coinArr.length) return;
+        const changes = coinArr.map((entry) => entry[field]);
         const maxChange = Math.max(...changes);
         percentageFactor = maxChange;
 
         const initialBubbles = Array.from(
             { length: numberOfBubbles },
             (_, index) => {
-                const randomValue = coinArr[index]?.[method].toFixed(2);
+                const randomValue = coinArr[index]?.[field].toFixed(2);
                 const radius = calculateRadius(
                     Math.abs(randomValue),
                     maxChange
@@ -57,14 +69,14 @@ const FloatingBubbles = ({ method }) => {
                     left: Math.random() * (window.innerWidth - radius),
                     velocityX: Math.random() * 2 - 1,
                     velocityY: Math.random() * 2 - 1,
-                    text: randomValue,
+                    text: [randomValue, coinArr[index]["coin_name"]],
                     radius: radius,
                 };
             }
         );
 
         setBubbles(initialBubbles);
-    }, []);
+    }, [coinArr]);
 
     useEffect(() => {
         const updateBubbles = () => {
@@ -110,7 +122,7 @@ const FloatingBubbles = ({ method }) => {
                         top: bubble.top,
                         left: bubble.left,
                         backgroundColor:
-                            bubble.text > 0
+                            bubble.text[0] > 0
                                 ? "rgba(0, 255, 0, 0.3)"
                                 : "rgba(255, 0, 0, 0.3)",
                         width: `${bubble.radius}px`,
@@ -120,7 +132,10 @@ const FloatingBubbles = ({ method }) => {
                         padding: "10px",
                     }}
                 >
-                    {bubble.text}%
+                    <div className="flex-col justify-center items-center mx-auto">
+                        <p className="text-xs mx-auto">{bubble?.text[1]}</p>
+                        <p>{bubble?.text[0]}%</p>
+                    </div>
                 </div>
             ))}
         </div>
