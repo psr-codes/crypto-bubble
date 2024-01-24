@@ -2,24 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  overflow-x: hidden;
+}
+
 /* FloatingBubbles.css */
 .floating-bubble {
-    @apply absolute w-24 h-24 bg-blue-500 text-white rounded-full flex items-center justify-center text-lg font-bold shadow-md transition-transform duration-300 ease-in-out;
+  @apply absolute w-24 h-24 bg-blue-500 text-white rounded-full flex items-center justify-center text-lg font-bold shadow-md transition-transform duration-300 ease-in-out;
 
-    &:hover {
-        @apply transform scale-150 border-red-500 bg-blue-700;
-    }
+  &:hover {
+    @apply transform scale-150 border-red-500 bg-blue-700;
+  }
 }
 
 .floating-bubble-even:hover {
-    @apply rounded-xl border-green-500;
+  @apply rounded-xl border-green-500;
 }
 
 @keyframes floatAnimation {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(10px);
-    }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
 }
+/* .main-svg {
+  background-color: blac transparent !important;
+} */

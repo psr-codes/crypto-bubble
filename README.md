@@ -18,7 +18,7 @@ Quickly find and focus on specific cryptocurrencies of interest, streamlining in
 
 Installation:
 
-Clone the repository: git clone https://github.com/yourusername/trending-crypto-tracker.git
+Clone the repository: git clone https://github.com/yourusername/crypto-bubble.git
 Install dependencies: npm install
 Usage:
 
@@ -29,8 +29,13 @@ Access the platform at http://localhost:3000
 If you encounter any issues or have suggestions, please open an issue on the repository.
 
 ## Technologies Used:
-React.js
-Charting Libraries (D3.js or Chart.js)
-Bootstrap or Tailwind CSS
-WebSocket Technology
-RESTful APIs
+React.js , 
+Charting Libraries (D3.js or Chart.js),
+Bootstrap or Tailwind CSS ,
+WebSocket Technology ,
+RESTful APIs,
+Machine Learning ,
+Pandas ,
+Next.js,
+Artifical Intelligence 
+
