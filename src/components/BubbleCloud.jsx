@@ -15,9 +15,9 @@ import {
     DrawerTrigger,
 } from "@/components/ui/drawer";
 
-function DrawerDemo({ bubble, index }) {
+function DrawerDemo({ bubble, key }) {
     return (
-        <Drawer key={index} className="">
+        <Drawer key={key} className="">
             <DrawerTrigger asChild>
                 <div
                     key={bubble.id}
@@ -178,7 +178,7 @@ const FloatingBubbles = ({ method }) => {
     return (
         <div className="relative w-[100vw]  h-[85vh]">
             {bubbles.map((bubble, index) => (
-                <DrawerDemo bubble={bubble} index={index} />
+                <DrawerDemo bubble={bubble} key={index} />
             ))}
         </div>
     );
