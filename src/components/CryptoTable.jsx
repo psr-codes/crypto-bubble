@@ -63,7 +63,7 @@ const CryptoTable = () => {
                                 {item?.crypto_stats?.Volume}$
                             </td>
 
-                            {data?.map((i, index) => {
+                            {data?.map((i, ind) => {
                                 if (i.coin_name === item.coin_name) {
                                     return (
                                         <td
@@ -72,7 +72,7 @@ const CryptoTable = () => {
                                                     ? "bg-red-500"
                                                     : "bg-green-500"
                                             }`}
-                                            key={index}
+                                            key={ind}
                                         >
                                             {i.change_year.toFixed(2)}%
                                         </td>
@@ -81,7 +81,7 @@ const CryptoTable = () => {
                                     return null;
                                 }
                             })}
-                            {data?.map((i) => {
+                            {data?.map((i, ind) => {
                                 if (i.coin_name === item.coin_name) {
                                     return (
                                         <td
@@ -90,6 +90,7 @@ const CryptoTable = () => {
                                                     ? "bg-red-500"
                                                     : "bg-green-500"
                                             }`}
+                                            key={ind}
                                         >
                                             {i.change_year.toFixed(2)}%
                                         </td>
@@ -98,7 +99,7 @@ const CryptoTable = () => {
                                     return null;
                                 }
                             })}
-                            {data?.map((i) => {
+                            {data?.map((i, ind) => {
                                 if (i.coin_name === item.coin_name) {
                                     return (
                                         <td
@@ -107,6 +108,7 @@ const CryptoTable = () => {
                                                     ? "bg-red-500"
                                                     : "bg-green-500"
                                             }`}
+                                            key={ind}
                                         >
                                             {i.change_year.toFixed(2)}%
                                         </td>
@@ -115,7 +117,7 @@ const CryptoTable = () => {
                                     return null;
                                 }
                             })}
-                            {data?.map((i) => {
+                            {data?.map((i, ind) => {
                                 if (i.coin_name === item.coin_name) {
                                     return (
                                         <td
@@ -124,6 +126,7 @@ const CryptoTable = () => {
                                                     ? "bg-red-500"
                                                     : "bg-green-500"
                                             }`}
+                                            key={ind}
                                         >
                                             {i.change_year.toFixed(2)}%
                                         </td>
