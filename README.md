@@ -18,7 +18,7 @@ Quickly find and focus on specific cryptocurrencies of interest, streamlining in
 
 Installation:
 
-Clone the repository: git clone https://github.com/yourusername/trending-crypto-tracker.git
+Clone the repository: git clone https://github.com/yourusername/crypto-bubble.git
 Install dependencies: npm install
 Usage:
 
