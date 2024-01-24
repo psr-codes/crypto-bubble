@@ -34,3 +34,8 @@ Charting Libraries (D3.js or Chart.js)
 Bootstrap or Tailwind CSS
 WebSocket Technology
 RESTful APIs
+Machine Learning
+Pandas 
+Next.js
+Artifical Intelligence
+
