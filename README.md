@@ -38,4 +38,5 @@ Machine Learning ,
 Pandas ,
 Next.js,
 Artifical Intelligence 
-
+## Deployed Project Link
+URL(https://crypto-bubble.vercel.app/)
