@@ -124,8 +124,8 @@ const FloatingBubbles = ({ method, setActiveTab }) => {
                     id: index + 1,
                     top: initialTop,
                     left: initialLeft,
-                    velocityX: Math.random() * 1 - 1,
-                    velocityY: Math.random() * 1 - 1,
+                    velocityX: Math.random() * 2 - 1,
+                    velocityY: Math.random() * 2 - 1,
                     text: [randomValue, coinArr[index]["coin_name"]],
                     symbol: symbols.cryptocurrencies.find(
                         (item) => item.name === coinArr[index]["coin_name"]

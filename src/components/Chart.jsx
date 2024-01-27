@@ -11,16 +11,17 @@ const DynamicPlot = dynamic(() => import("react-plotly.js"), {
 });
 
 const CandlestickChart = ({ bubble }) => {
+    const { activeTab, setActiveTab } = globalStore();
+
+    const [candlestickData, setCandlestickData] = useState(null);
+
     if (!bubble) {
         return;
     }
 
-    const { activeTab, setActiveTab } = globalStore();
-
-    const [candlestickData, setCandlestickData] = useState(null);
     console.log("coin name", bubble);
 
-    const fetchData = async () => {
+    useEffect(() => {
         const url = `https://cryptostats.onrender.com/${activeTab}-stats`;
         axios
             .post(
@@ -39,11 +40,6 @@ const CandlestickChart = ({ bubble }) => {
                 console.log(error);
                 setError(error);
             });
-    };
-
-    useEffect(() => {
-        fetchData();
-        console.log("active tab", activeTab);
     }, [activeTab]);
     return (
         <div className="relative    w-full h-full">
@@ -91,7 +87,7 @@ const CandlestickChart = ({ bubble }) => {
                                 key={ind}
                             >
                                 <div
-                                    className={`text-white flex-col justify-center items-center font-bold ${
+                                    className={`text-white flex-col justify-center items-center font-bold cursor-pointer ${
                                         activeTab == "day"
                                             ? "bg-gray-700 px-3"
                                             : ""
@@ -113,7 +109,7 @@ const CandlestickChart = ({ bubble }) => {
                                 </div>
 
                                 <div
-                                    className={`text-white flex-col justify-center items-center font-bold ${
+                                    className={`text-white flex-col justify-center items-center font-bold cursor-pointer ${
                                         activeTab == "week"
                                             ? "bg-gray-700 px-3"
                                             : ""
@@ -134,7 +130,7 @@ const CandlestickChart = ({ bubble }) => {
                                     </p>
                                 </div>
                                 <div
-                                    className={`text-white flex-col justify-center items-center font-bold ${
+                                    className={`text-white flex-col justify-center items-center font-bold cursor-pointer ${
                                         activeTab == "month"
                                             ? "bg-gray-700 px-3"
                                             : ""
@@ -155,7 +151,7 @@ const CandlestickChart = ({ bubble }) => {
                                     </p>
                                 </div>
                                 <div
-                                    className={`text-white flex-col justify-center items-center font-bold ${
+                                    className={`text-white flex-col justify-center items-center font-bold cursor-pointer ${
                                         activeTab == "year"
                                             ? "bg-gray-700 px-3"
                                             : ""
@@ -190,11 +186,11 @@ const CandlestickChart = ({ bubble }) => {
                                 className="flex justify-between px-[90px] items-center p-0 m-0 w-full"
                                 key={ind}
                             >
-                                <div className="text-white flex-col justify-center items-center font-bold">
+                                <div className="text-white flex-col justify-center items-center font-bold cursor-pointer">
                                     <p className="text-gray-300">Volume</p>
                                     <p>{i?.crypto_stats?.["Volume"]}</p>
                                 </div>
-                                <div className="text-white flex-col justify-center items-center font-bold">
+                                <div className="text-white flex-col justify-center items-center font-bold cursor-pointer">
                                     <p className="text-gray-300">Market Cap</p>
                                     <p>{i?.crypto_stats?.["Market Cap"]}</p>
                                 </div>
