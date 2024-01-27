@@ -1,5 +1,6 @@
 import { day_stats } from "@/constants/day_stats";
 import dynamic from "next/dynamic";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const DynamicPlot = dynamic(() => import("react-plotly.js"), {
@@ -38,9 +39,34 @@ const CandlestickChart = ({ candlestickData }) => {
 };
 
 const CandlestickPage = () => {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
   const [candlestickData, setCandlestickData] = useState(
     day_stats[0].day_stats
   );
+
+  useEffect(() => {
+    // Define the URL and name to send in the POST request
+    const apiUrl = "https://cryptostats.onrender.com/week-stats";
+    const name = "Aeternity";
+
+    // Send the POST request using Axios
+    axios
+      .post(
+        apiUrl,
+        { name: name },
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then((response) => {
+        // Handle successful response
+        console.log(response.data.data);
+        setData(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+      });
+  }, []);
 
   return (
     <div>
