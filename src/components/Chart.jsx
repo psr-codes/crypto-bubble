@@ -3,59 +3,57 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { data } from "@/constants/change_in_crypto";
 import { stats } from "@/constants/crypto_stats";
+import axios from "axios";
+import globalStore from "@/store/globalStore";
 
 const DynamicPlot = dynamic(() => import("react-plotly.js"), {
     ssr: false, // Disable server-side rendering
 });
 
-const CandlestickChart = ({ bubble, timeScale }) => {
-    if (!bubble || !timeScale) {
+const CandlestickChart = ({ bubble }) => {
+    if (!bubble) {
         return;
     }
+
+    const { activeTab, setActiveTab } = globalStore();
+
     const [candlestickData, setCandlestickData] = useState(null);
-    console.log("coin name", bubble?.text?.[1]);
+    console.log("coin name", bubble);
 
-    // const fetchData = async () => {
-    //     try {
-    //         const res = await fetch(
-    //             `https://cryptostats.onrender.com/${timeScale}-stats`,
-    //             {
-    //                 method: "POST",
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                 },
-    //                 body: JSON.stringify({
-    //                     coin: bubble.text[1],
-    //                 }),
-    //             }
-    //         );
+    const fetchData = async () => {
+        const url = `https://cryptostats.onrender.com/${activeTab}-stats`;
+        axios
+            .post(
+                url,
+                { name: bubble },
+                { headers: { "Content-Type": "application/json" } }
+            )
+            .then((response) => {
+                // Handle successful response
+                console.log(response.data.data);
+                console.log("timescale_${stats}", `${activeTab}_stats`);
 
-    //         if (!res.ok) {
-    //             throw new Error(
-    //                 `Failed to fetch data: ${res.status} ${res.statusText}`
-    //             );
-    //         }
+                setCandlestickData(response.data.data[0][`${activeTab}_stats`]);
+            })
+            .catch((error) => {
+                console.log(error);
+                setError(error);
+            });
+    };
 
-    //         const data = await res.json();
-    //         console.log("data", data);
-    //         setCandlestickData(data);
-    //     } catch (error) {
-    //         console.error("Fetch error:", error);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     fetchData();
-    // }, [timeScale]);
+    useEffect(() => {
+        fetchData();
+        console.log("active tab", activeTab);
+    }, [activeTab]);
     return (
-        <div className="relative">
+        <div className="relative    w-full h-full">
             {candlestickData && (
                 <DynamicPlot
                     className="  p-0 m-0"
                     data={[
                         {
                             type: "candlestick",
-                            x: candlestickData.map((item) => item.Date),
+                            // x: candlestickData.map((item) => item.Date),
                             open: candlestickData.map((item) => item.Open),
                             high: candlestickData.map((item) => item.High),
                             low: candlestickData.map((item) => item.Low),
@@ -71,7 +69,7 @@ const CandlestickChart = ({ bubble, timeScale }) => {
                         },
                     ]}
                     layout={{
-                        title: bubble.text[1],
+                        title: bubble,
                         plot_bgcolor: "rgba(0,0,0,0)", // Make the plot background transparent
                         paper_bgcolor: "rgba(0,0,0,0)", // Make the paper background transparent
                         font: { color: "white" }, // Set the font color to white for better visibility
@@ -86,13 +84,22 @@ const CandlestickChart = ({ bubble, timeScale }) => {
             )}
             <div className=" absolute bottom-[20px] w-full">
                 {data?.map((i, ind) => {
-                    if (i.coin_name === bubble?.text?.[1]) {
+                    if (i.coin_name === bubble) {
                         return (
                             <div
                                 className="flex justify-evenly items-center p-0 m-0 w-full"
                                 key={ind}
                             >
-                                <div className="text-white flex-col justify-center items-center font-bold">
+                                <div
+                                    className={`text-white flex-col justify-center items-center font-bold ${
+                                        activeTab == "day"
+                                            ? "bg-gray-700 px-3"
+                                            : ""
+                                    }`}
+                                    onClick={() => {
+                                        setActiveTab("day");
+                                    }}
+                                >
                                     <p className="">Day</p>
                                     <p
                                         className={`${
@@ -104,7 +111,17 @@ const CandlestickChart = ({ bubble, timeScale }) => {
                                         {i.change_day.toFixed(2)}
                                     </p>
                                 </div>
-                                <div className="text-white flex-col justify-center items-center font-bold">
+
+                                <div
+                                    className={`text-white flex-col justify-center items-center font-bold ${
+                                        activeTab == "week"
+                                            ? "bg-gray-700 px-3"
+                                            : ""
+                                    }`}
+                                    onClick={() => {
+                                        setActiveTab("week");
+                                    }}
+                                >
                                     <p className="">Week</p>
                                     <p
                                         className={` ${
@@ -116,7 +133,16 @@ const CandlestickChart = ({ bubble, timeScale }) => {
                                         {i.change_week.toFixed(2)}
                                     </p>
                                 </div>
-                                <div className="text-white flex-col justify-center items-center font-bold">
+                                <div
+                                    className={`text-white flex-col justify-center items-center font-bold ${
+                                        activeTab == "month"
+                                            ? "bg-gray-700 px-3"
+                                            : ""
+                                    }`}
+                                    onClick={() => {
+                                        setActiveTab("month");
+                                    }}
+                                >
                                     <p className="">Month</p>
                                     <p
                                         className={` ${
@@ -128,7 +154,16 @@ const CandlestickChart = ({ bubble, timeScale }) => {
                                         {i.change_month.toFixed(2)}
                                     </p>
                                 </div>
-                                <div className="text-white flex-col justify-center items-center font-bold">
+                                <div
+                                    className={`text-white flex-col justify-center items-center font-bold ${
+                                        activeTab == "year"
+                                            ? "bg-gray-700 px-3"
+                                            : ""
+                                    }`}
+                                    onClick={() => {
+                                        setActiveTab("year");
+                                    }}
+                                >
                                     <p className="">Year</p>
                                     <p
                                         className={` ${
@@ -149,7 +184,7 @@ const CandlestickChart = ({ bubble, timeScale }) => {
             </div>
             <div className=" absolute top-[0] w-full">
                 {stats?.map((i, ind) => {
-                    if (i.coin_name === bubble?.text?.[1]) {
+                    if (i.coin_name === bubble) {
                         return (
                             <div
                                 className="flex justify-between px-[90px] items-center p-0 m-0 w-full"
@@ -174,15 +209,16 @@ const CandlestickChart = ({ bubble, timeScale }) => {
     );
 };
 
-const CandlestickPage = ({ bubble }) => {
-    var timeScale = "month";
+const CandlestickPage = ({ bubble, method }) => {
+    var activeTab = "month";
     console.log("bubble", bubble);
     return (
-        <div>
+        <div className=" ">
             <CandlestickChart
                 // candlestickData={candlestickData}
                 bubble={bubble}
-                timeScale={timeScale}
+                // activeTab={activeTab}
+                // setActiveTab={setActiveTab}
             />
         </div>
     );

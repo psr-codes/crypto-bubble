@@ -12,6 +12,7 @@ import {
     DrawerTrigger,
 } from "@/components/ui/drawer";
 
+import { X } from "lucide-react";
 import styles from "./bubbleStyle.module.css";
 
 import { symbols } from "@/constants/crypto_logo";
@@ -37,7 +38,7 @@ import { symbols } from "@/constants/crypto_logo";
 //     );
 // }
 
-const FloatingBubbles = ({ method }) => {
+const FloatingBubbles = ({ method, setActiveTab }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [activeBubble, setActiveBubble] = useState(null);
     const [coinArr, setCoinArr] = useState(data);
@@ -101,12 +102,11 @@ const FloatingBubbles = ({ method }) => {
 
         return Math.max(radius, 60);
     };
-
     useEffect(() => {
         if (!coinArr.length) return;
+
         const changes = coinArr.map((entry) => entry[field]);
         const maxChange = Math.max(...changes);
-        // percentageFactor = maxChange;
 
         const initialBubbles = Array.from(
             { length: numberOfBubbles },
@@ -114,19 +114,22 @@ const FloatingBubbles = ({ method }) => {
                 const randomValue = coinArr[index]?.[field].toFixed(2);
                 const radius = calculateRadius(Math.abs(randomValue), method);
 
+                // Calculate initial positions within the visible screen area
+                const initialTop =
+                    Math.random() * (window.innerHeight - radius);
+                const initialLeft =
+                    Math.random() * (window.innerWidth - radius);
+
                 return {
                     id: index + 1,
-                    top: Math.random() * (window.innerHeight - radius),
-                    left: Math.random() * (window.innerWidth - radius),
-                    velocityX: Math.random() * 3 - 1,
-                    velocityY: Math.random() * 3 - 1,
+                    top: initialTop,
+                    left: initialLeft,
+                    velocityX: Math.random() * 1 - 1,
+                    velocityY: Math.random() * 1 - 1,
                     text: [randomValue, coinArr[index]["coin_name"]],
-                    symbol: symbols.cryptocurrencies.find((item) => {
-                        if (item.name === coinArr[index]["coin_name"]) {
-                            return item.symbol;
-                        }
-                        return null; // Handle the case when the condition isn't met
-                    }),
+                    symbol: symbols.cryptocurrencies.find(
+                        (item) => item.name === coinArr[index]["coin_name"]
+                    ),
                     radius: radius,
                 };
             }
@@ -142,22 +145,27 @@ const FloatingBubbles = ({ method }) => {
                     let newTop = bubble.top + bubble.velocityY;
                     let newLeft = bubble.left + bubble.velocityX;
 
-                    // Check for collisions with window edges
-                    if (newTop < 0) {
-                        newTop = 0; // Restrict to the top of the window
-                        bubble.velocityY *= -1; // Reverse Y velocity on collision
-                    } else if (newTop > window.innerHeight - 200) {
-                        newTop = window.innerHeight - 200; // Restrict to 85vh from the top
-                        bubble.velocityY *= -1; // Reverse Y velocity on collision
+                    // Reverse velocity and adjust position if bubble hits window edges
+                    if (
+                        newTop < 0 ||
+                        newTop + bubble.radius > window.innerHeight
+                    ) {
+                        bubble.velocityY *= -1; // Reverse Y velocity
+                        newTop = Math.max(
+                            0,
+                            Math.min(window.innerHeight - bubble.radius, newTop)
+                        ); // Keep bubble within window boundaries
                     }
 
-                    // Check for collisions with window edges
-                    if (newLeft < 0) {
-                        newLeft = 0; // Restrict to the left of the window
-                        bubble.velocityX *= -1; // Reverse X velocity on collision
-                    } else if (newLeft > window.innerWidth - 90) {
-                        newLeft = window.innerWidth - 90; // Restrict to the width of the window
-                        bubble.velocityX *= -1; // Reverse X velocity on collision
+                    if (
+                        newLeft < 0 ||
+                        newLeft + bubble.radius > window.innerWidth
+                    ) {
+                        bubble.velocityX *= -1; // Reverse X velocity
+                        newLeft = Math.max(
+                            0,
+                            Math.min(window.innerWidth - bubble.radius, newLeft)
+                        ); // Keep bubble within window boundaries
                     }
 
                     return { ...bubble, top: newTop, left: newLeft };
@@ -167,10 +175,14 @@ const FloatingBubbles = ({ method }) => {
 
         const intervalId = setInterval(updateBubbles, 16);
 
+        if (isModalOpen) {
+            clearInterval(intervalId);
+        }
         return () => clearInterval(intervalId);
-    }, []);
+    }, [isModalOpen]);
+
     return (
-        <div className="relative w-[100vw] flex justify-center items-center h-[85vh]">
+        <div className="relative max-w-[100vw] flex justify-center items-center h-[85vh] overflow-hidden">
             {bubbles.map((bubble, index) => (
                 // <DrawerDemo
                 //     bubble={bubble}
@@ -225,8 +237,23 @@ const FloatingBubbles = ({ method }) => {
             ))}
 
             {isModalOpen && activeBubble && (
-                <div className="absolute w-[75%]  h-full text-white bg-black  mx-auto opacity-85 flex justify-center items-center">
-                    <CandlestickPage bubble={activeBubble} />
+                <div className="absolute   w-[75%] bottom-0 h-full text-white bg-black  mx-auto opacity-85 flex justify-center items-center">
+                    <p
+                        className="absolute top-5 right-5"
+                        onClick={() => {
+                            setIsModalOpen(false);
+                        }}
+                    >
+                        <X size={30} />
+                    </p>
+
+                    <div className="w-full">
+                        <CandlestickPage
+                            // bubble={bubble}
+                            bubble={activeBubble}
+                            method={method}
+                        />
+                    </div>
                 </div>
             )}
         </div>
