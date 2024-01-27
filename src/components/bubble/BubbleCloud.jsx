@@ -247,7 +247,7 @@ const FloatingBubbles = ({ method, setActiveTab }) => {
                         <X size={30} />
                     </p>
 
-                    <div className="w-full">
+                    <div className="w-full mx-auto  flex justify-center items-center">
                         <CandlestickPage
                             // bubble={bubble}
                             bubble={activeBubble}

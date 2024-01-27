@@ -20,7 +20,6 @@ import {
 
 import { symbols } from "@/constants/crypto_logo";
 
-// const symbols.cryptocurrencies = [
 //     {
 //         value: "next.js",
 //         name: "Next.js",
@@ -43,9 +42,8 @@ import { symbols } from "@/constants/crypto_logo";
 //     },
 // ];
 
-export default function ComboboxDemo() {
+export default function ComboboxDemo({ selectedCoins, setSelectedCoins }) {
     const [open, setOpen] = useState(false);
-    const [selectedCoins, setSelectedCoins] = useState([]);
 
     useEffect(() => {
         console.log("selected coins", selectedCoins);
@@ -70,7 +68,7 @@ export default function ComboboxDemo() {
                     />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0 text-white ">
+            <PopoverContent className="w-[200px] p-0 text-white bg-gray-700 ">
                 <Command>
                     <CommandInput
                         placeholder="Search coin..."

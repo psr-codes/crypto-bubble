@@ -1,10 +1,9 @@
 import React from "react";
-import { stats } from "@/constants/crypto_stats";
 import { data } from "@/constants/change_in_crypto";
 
-const CryptoTable = () => {
+const CryptoTable = ({ stats }) => {
     return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-[85%] mx-auto z-999">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-[85%]  z-999">
             <table className="w-full text-sm text-left rtl:text-right   text-white  font-semibold bg-[#1E2A31]  ">
                 <thead className="text-xs   uppercase bg-gray-700    text-white  font-semibold">
                     <tr>
