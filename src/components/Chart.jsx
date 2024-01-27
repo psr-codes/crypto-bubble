@@ -15,13 +15,12 @@ const CandlestickChart = ({ bubble }) => {
 
     const [candlestickData, setCandlestickData] = useState(null);
 
-    if (!bubble) {
-        return;
-    }
-
     console.log("coin name", bubble);
 
     useEffect(() => {
+        if (!bubble) {
+            return;
+        }
         const url = `https://cryptostats.onrender.com/${activeTab}-stats`;
         axios
             .post(
