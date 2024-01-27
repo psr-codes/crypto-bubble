@@ -21,6 +21,7 @@ const CandlestickChart = ({ bubble }) => {
         if (!bubble) {
             return;
         }
+
         const url = `https://cryptostats.onrender.com/${activeTab}-stats`;
         axios
             .post(
@@ -39,7 +40,7 @@ const CandlestickChart = ({ bubble }) => {
                 console.log(error);
                 setError(error);
             });
-    }, [activeTab]);
+    }, [activeTab, bubble]);
     return (
         <div className="relative    w-full h-full">
             {candlestickData && (
