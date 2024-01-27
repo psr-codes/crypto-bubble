@@ -1,6 +1,7 @@
 import React from "react";
 import { stats } from "@/constants/crypto_stats";
 import { data } from "@/constants/change_in_crypto";
+
 const CryptoTable = () => {
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-[85%] mx-auto z-999">
@@ -45,24 +46,25 @@ const CryptoTable = () => {
                             className="   border-gray-700   hover:bg-gray-600"
                             key={index}
                         >
-                            <td className="w-4 p-4">1.</td>
+                            <td className="w-4 p-4">{index + 1}</td>
                             <th
                                 scope="row"
                                 className="px-6 py-4   whitespace-nowrap   text-white  font-semibold"
                             >
                                 {item.coin_name}
                             </th>
-                            <td className="px-6 py-4">
-                                {item?.crypto_stats?.["Market Cap"]}$
-                            </td>
+
                             <td className="px-6 py-4">
                                 {item?.crypto_stats?.Open}$
+                            </td>
+                            <td className="px-6 py-4">
+                                {item?.crypto_stats?.["Market Cap"]}$
                             </td>
                             <td className="px-6 py-4">
                                 {item?.crypto_stats?.Volume}$
                             </td>
 
-                            {data?.map((i) => {
+                            {data?.map((i, ind) => {
                                 if (i.coin_name === item.coin_name) {
                                     return (
                                         <td
@@ -71,15 +73,16 @@ const CryptoTable = () => {
                                                     ? "bg-red-500"
                                                     : "bg-green-500"
                                             }`}
+                                            key={ind}
                                         >
-                                            {i.change_year.toFixed(2)}%
+                                            {i.change_day.toFixed(2)}%
                                         </td>
                                     );
                                 } else {
                                     return null;
                                 }
                             })}
-                            {data?.map((i) => {
+                            {data?.map((i, ind) => {
                                 if (i.coin_name === item.coin_name) {
                                     return (
                                         <td
@@ -88,15 +91,16 @@ const CryptoTable = () => {
                                                     ? "bg-red-500"
                                                     : "bg-green-500"
                                             }`}
+                                            key={ind}
                                         >
-                                            {i.change_year.toFixed(2)}%
+                                            {i.change_week.toFixed(2)}%
                                         </td>
                                     );
                                 } else {
                                     return null;
                                 }
                             })}
-                            {data?.map((i) => {
+                            {data?.map((i, ind) => {
                                 if (i.coin_name === item.coin_name) {
                                     return (
                                         <td
@@ -105,15 +109,16 @@ const CryptoTable = () => {
                                                     ? "bg-red-500"
                                                     : "bg-green-500"
                                             }`}
+                                            key={ind}
                                         >
-                                            {i.change_year.toFixed(2)}%
+                                            {i.change_month.toFixed(2)}%
                                         </td>
                                     );
                                 } else {
                                     return null;
                                 }
                             })}
-                            {data?.map((i) => {
+                            {data?.map((i, ind) => {
                                 if (i.coin_name === item.coin_name) {
                                     return (
                                         <td
@@ -122,6 +127,7 @@ const CryptoTable = () => {
                                                     ? "bg-red-500"
                                                     : "bg-green-500"
                                             }`}
+                                            key={ind}
                                         >
                                             {i.change_year.toFixed(2)}%
                                         </td>

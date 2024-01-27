@@ -18,8 +18,14 @@ const CandlestickChart = ({ candlestickData }) => {
           high: candlestickData.map((item) => item.High),
           low: candlestickData.map((item) => item.Low),
           close: candlestickData.map((item) => item.Close),
-          increasing: { line: { color: "green", width: 1 }, opacity: 0.5 },
-          decreasing: { line: { color: "red", width: 1 }, opacity: 0.5 },
+          increasing: {
+            line: { color: "green", width: 1 },
+            opacity: 0.5,
+          },
+          decreasing: {
+            line: { color: "red", width: 1 },
+            opacity: 0.5,
+          },
         },
       ]}
       layout={{
@@ -39,34 +45,9 @@ const CandlestickChart = ({ candlestickData }) => {
 };
 
 const CandlestickPage = () => {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
   const [candlestickData, setCandlestickData] = useState(
     day_stats[0].day_stats
   );
-
-  useEffect(() => {
-    // Define the URL and name to send in the POST request
-    const apiUrl = "https://cryptostats.onrender.com/week-stats";
-    const name = "Aeternity";
-
-    // Send the POST request using Axios
-    axios
-      .post(
-        apiUrl,
-        { name: name },
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then((response) => {
-        // Handle successful response
-        console.log(response.data.data);
-        setData(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(error);
-      });
-  }, []);
 
   return (
     <div>

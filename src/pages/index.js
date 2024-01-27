@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Tabs from "../components/Tabs";
-import BubbleCloud from "../components/BubbleCloud";
+import BubbleCloud from "../components/bubble/BubbleCloud";
 import CryptoTable from "../components/CryptoTable";
 
 export default function Home() {
