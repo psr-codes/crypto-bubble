@@ -53,11 +53,12 @@ const CryptoTable = () => {
                             >
                                 {item.coin_name}
                             </th>
-                            <td className="px-6 py-4">
-                                {item?.crypto_stats?.["Market Cap"]}$
-                            </td>
+
                             <td className="px-6 py-4">
                                 {item?.crypto_stats?.Open}$
+                            </td>
+                            <td className="px-6 py-4">
+                                {item?.crypto_stats?.["Market Cap"]}$
                             </td>
                             <td className="px-6 py-4">
                                 {item?.crypto_stats?.Volume}$

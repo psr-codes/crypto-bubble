@@ -23,7 +23,7 @@ function DrawerDemo({ bubble, key }) {
                 <section
                     key={bubble.id}
                     // className={`floating-bubble    transition-all duration-500 ease-in-out `}
-                    className={`${styles.stage} floating-bubble    transition-all duration-500 ease-in-out bg-transparent `}
+                    className={`${styles.stage} cursor-pointer floating-bubble    transition-all duration-500 ease-in-out bg-transparent `}
                     style={{
                         top: bubble.top,
                         left: bubble.left,
@@ -67,7 +67,7 @@ function DrawerDemo({ bubble, key }) {
                 {/* <BubbleComponent /> */}
             </DrawerTrigger>
             <DrawerContent className="text-white bg-black  mx-auto opacity-85 flex justify-center items-center">
-                <CandlestickPage />
+                <CandlestickPage bubble={bubble} />
             </DrawerContent>
         </Drawer>
     );
@@ -112,7 +112,6 @@ const FloatingBubbles = ({ method }) => {
     var numberOfBubbles = 50;
 
     const [bubbles, setBubbles] = useState([]);
-    var percentageFactor = 0;
 
     const calculateRadius = (value, method) => {
         var scaleFactor = 0;
@@ -141,7 +140,7 @@ const FloatingBubbles = ({ method }) => {
         if (!coinArr.length) return;
         const changes = coinArr.map((entry) => entry[field]);
         const maxChange = Math.max(...changes);
-        percentageFactor = maxChange;
+        // percentageFactor = maxChange;
 
         const initialBubbles = Array.from(
             { length: numberOfBubbles },

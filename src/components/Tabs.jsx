@@ -5,6 +5,9 @@ import { tabsData } from "@/constants/data";
 
 export default function TabsDemo({ activeTab, setActiveTab }) {
     const handleValueChange = (value) => {
+        if (value == "recommend") {
+            return;
+        }
         console.log(value);
         setActiveTab(value);
     };
@@ -56,6 +59,7 @@ export default function TabsDemo({ activeTab, setActiveTab }) {
             <TabsContent value="week"></TabsContent>
             <TabsContent value="month"></TabsContent>
             <TabsContent value="year"></TabsContent>
+            <TabsContent value="recommend"></TabsContent>
         </Tabs>
     );
 }
