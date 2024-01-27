@@ -7,7 +7,7 @@ npm run dev
 # or
 yarn dev
 # or
-pnpm dev
+npm dev
 ```
 
 
@@ -27,23 +27,42 @@ markdown
 Welcome to our Trending Cryptocurrency Tracker, a powerful tool designed to provide real-time insights into the dynamic world of cryptocurrencies. This project aims to offer a user-friendly interface with interactive visuals, ensuring an intuitive and informative experience for users of all levels.
 
 ## Features
-- Real-time Data Updates:
-Receive instant and accurate cryptocurrency information for timely decision-making in a dynamic market.
-
 - User-Friendly Interface with Interactive Visuals:
 Navigate through complex data effortlessly with a visually appealing and interactive design suitable for both beginners and experienced enthusiasts.
 
-- Customizable Settings for Users:
-Personalize the platform to align with your preferences, creating a tailored experience for each user.
+- Recommendations For CryptoCurrency Users:
+Personalize the platform to align with your preferences.
 
 - Search and Filter Options for Cryptocurrencies:
-Quickly find and focus on specific cryptocurrencies of interest, streamlining information retrieval and analysis.
+Quickly focus on specific cryptocurrencies of interest, streamlining information retrieval and analysis.
 
-## Video Demos
-- [Video 1]((https://youtu.be/I1nl7jY9VMM))
+- Visualisation Of Each CryptoChart :
+ Gain a comprehensive understanding of individual cryptocurrencies through detailed visualizations. Explore price trends, market capitalization, 24-hour trading volume, and more. Our platform provides insightful charts for various time frames, allowing users to make informed decisions based on comprehensive data.
+  
+- Price, Market Cap, Volume (24hr), Day, Week, Month, Year, Circulating Supply
+ 
+- Daily, Weekly, Monthly, Yearly  Gross Analysis of Each Crypto And Whole Market:
+  Keep track of cryptocurrency performance with daily, weekly, monthly, and yearly gross analyses. Understand the market trends over different time frames and make informed decisions based on a holistic view of each cryptocurrency and the overall market.
+  
+- Calculation Of  Recommended Weightage Of Each CryptoCurrency:
+  Optimize your cryptocurrency portfolio with our recommended weightage calculations. Our system assesses various factors, including historical performance, market trends, and risk metrics, to suggest an ideal weightage for each cryptocurrency in your portfolio. Make data-driven investment decisions and maximize your portfolio's potential.
+
+- Created an API(https://cryptostats.onrender.com/) with 5 Routes :
+  /day-stats(POST,"name"): daily statistical data of crypto
+  
+  /change-in-crypto(GET): daily, weekly, monthly, and annual changes in crypto
+  
+  /week stats(POST,"name"): weekly statistical data of each cryptocurrency
+  
+  /month-stats(POST,"name"): monthly statistical data of each cryptocurrency
+  
+  /year-stats(POST,"name"): annual statistical data of each cryptocurrency
+  
+## Video Demo
+- [Video ](https://youtu.be/I1nl7jY9VMM)
 
 ## Presentation (PPT)
-For a detailed overview of our project, please check out our [PowerPoint Presentation](https://docs.google.com/presentation/d/1zMQS4eyLGuNOtmT97g692U4B7F5zRqvjBhUvIi1alE/edit?usp=sharing).
+For a detailed overview of our project, please check out our [PowerPoint Presentation](https://docs.google.com/presentation/d/1zMQ-S4eyLGuNOtmT97g692U4B7F5zRqvjBhUvIi1alE/edit?usp=sharing)
 
 ## Live URL
 Visit our website at [CryptoBubbles](https://crypto-bubble.vercel.app/).
@@ -52,23 +71,26 @@ Visit our website at [CryptoBubbles](https://crypto-bubble.vercel.app/).
 
 ## Tech Stack
 We have built CryptoCurrency Tracker using a diverse tech stack, including:
-- 
-- 
-- 
+- Chart Libraries(Matplotlib or Plotly.lib)
+- Artificial Intelligence
+- Data Analytics
 - Tailwind CSS
 - React
 - Next.js
-- Firebase Authentication
-- Firebase Firestore Database
-- Firebase Storage
-- Vercel for Hosting
+- RESTful API Flask
+- Machine Learning
+- Pandas, NumPy
+- Vercel for  Web Hosting, Render for API Hosting
 
 ## Screenshots
 CryptoCurrency Bubbles:
-![login screen](/Output/Pic1.png)
+![Output screen](/Output/Pic1.png)
 
 Table:
-![google auth](/Output/Pic2.png)
+![Output screen](/Output/Pic2.png)
+
+Charts:
+![Output screen](/Output/Pic3.png)
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
