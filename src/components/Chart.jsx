@@ -8,45 +8,85 @@ const DynamicPlot = dynamic(() => import("react-plotly.js"), {
     ssr: false, // Disable server-side rendering
 });
 
-const CandlestickChart = ({ candlestickData, bubble }) => {
+const CandlestickChart = ({ bubble, timeScale }) => {
+    if (!bubble || !timeScale) {
+        return;
+    }
+    const [candlestickData, setCandlestickData] = useState(null);
+    console.log("coin name", bubble?.text?.[1]);
+
+    // const fetchData = async () => {
+    //     try {
+    //         const res = await fetch(
+    //             `https://cryptostats.onrender.com/${timeScale}-stats`,
+    //             {
+    //                 method: "POST",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                 },
+    //                 body: JSON.stringify({
+    //                     coin: bubble.text[1],
+    //                 }),
+    //             }
+    //         );
+
+    //         if (!res.ok) {
+    //             throw new Error(
+    //                 `Failed to fetch data: ${res.status} ${res.statusText}`
+    //             );
+    //         }
+
+    //         const data = await res.json();
+    //         console.log("data", data);
+    //         setCandlestickData(data);
+    //     } catch (error) {
+    //         console.error("Fetch error:", error);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     fetchData();
+    // }, [timeScale]);
     return (
         <div className="relative">
-            <DynamicPlot
-                className="  p-0 m-0"
-                data={[
-                    {
-                        type: "candlestick",
-                        x: candlestickData.map((item) => item.Date),
-                        open: candlestickData.map((item) => item.Open),
-                        high: candlestickData.map((item) => item.High),
-                        low: candlestickData.map((item) => item.Low),
-                        close: candlestickData.map((item) => item.Close),
-                        increasing: {
-                            line: { color: "green", width: 1 },
-                            opacity: 0.5,
+            {candlestickData && (
+                <DynamicPlot
+                    className="  p-0 m-0"
+                    data={[
+                        {
+                            type: "candlestick",
+                            x: candlestickData.map((item) => item.Date),
+                            open: candlestickData.map((item) => item.Open),
+                            high: candlestickData.map((item) => item.High),
+                            low: candlestickData.map((item) => item.Low),
+                            close: candlestickData.map((item) => item.Close),
+                            increasing: {
+                                line: { color: "green", width: 1 },
+                                opacity: 0.5,
+                            },
+                            decreasing: {
+                                line: { color: "red", width: 1 },
+                                opacity: 0.5,
+                            },
                         },
-                        decreasing: {
-                            line: { color: "red", width: 1 },
-                            opacity: 0.5,
+                    ]}
+                    layout={{
+                        title: bubble.text[1],
+                        plot_bgcolor: "rgba(0,0,0,0)", // Make the plot background transparent
+                        paper_bgcolor: "rgba(0,0,0,0)", // Make the paper background transparent
+                        font: { color: "white" }, // Set the font color to white for better visibility
+                        xaxis: {
+                            gridcolor: "rgba(255,255,255,0.1)", // Set the x-axis grid color
                         },
-                    },
-                ]}
-                layout={{
-                    title: bubble.text[1],
-                    plot_bgcolor: "rgba(0,0,0,0)", // Make the plot background transparent
-                    paper_bgcolor: "rgba(0,0,0,0)", // Make the paper background transparent
-                    font: { color: "white" }, // Set the font color to white for better visibility
-                    xaxis: {
-                        gridcolor: "rgba(255,255,255,0.1)", // Set the x-axis grid color
-                    },
-                    yaxis: {
-                        gridcolor: "rgba(255,255,255,0.1)", // Set the y-axis grid color
-                    },
-                }}
-            />
+                        yaxis: {
+                            gridcolor: "rgba(255,255,255,0.1)", // Set the y-axis grid color
+                        },
+                    }}
+                />
+            )}
             <div className=" absolute bottom-[20px] w-full">
                 {data?.map((i, ind) => {
-                    if (i.coin_name === bubble.text[1]) {
+                    if (i.coin_name === bubble?.text?.[1]) {
                         return (
                             <div
                                 className="flex justify-evenly items-center p-0 m-0 w-full"
@@ -109,7 +149,7 @@ const CandlestickChart = ({ candlestickData, bubble }) => {
             </div>
             <div className=" absolute top-[0] w-full">
                 {stats?.map((i, ind) => {
-                    if (i.coin_name === bubble.text[1]) {
+                    if (i.coin_name === bubble?.text?.[1]) {
                         return (
                             <div
                                 className="flex justify-between px-[90px] items-center p-0 m-0 w-full"
@@ -135,15 +175,14 @@ const CandlestickChart = ({ candlestickData, bubble }) => {
 };
 
 const CandlestickPage = ({ bubble }) => {
-    const [candlestickData, setCandlestickData] = useState(
-        day_stats[0].day_stats
-    );
-
+    var timeScale = "month";
+    console.log("bubble", bubble);
     return (
         <div>
             <CandlestickChart
-                candlestickData={candlestickData}
+                // candlestickData={candlestickData}
                 bubble={bubble}
+                timeScale={timeScale}
             />
         </div>
     );

@@ -16,64 +16,30 @@ import styles from "./bubbleStyle.module.css";
 
 import { symbols } from "@/constants/crypto_logo";
 
-function DrawerDemo({ bubble, key }) {
-    return (
-        <Drawer key={key} className="">
-            <DrawerTrigger asChild>
-                <section
-                    key={bubble.id}
-                    // className={`floating-bubble    transition-all duration-500 ease-in-out `}
-                    className={`${styles.stage} cursor-pointer floating-bubble    transition-all duration-500 ease-in-out bg-transparent `}
-                    style={{
-                        top: bubble.top,
-                        left: bubble.left,
-                        // backgroundColor:
-                        //     bubble.text[0] > 0
-                        //         ? "rgba(0, 255, 0, 0.3)"
-                        //         : "rgba(255, 0, 0, 0.3)",
-                        backgroundColor: "transparent",
-                        width: `${bubble.radius}px`,
-                        height: `${bubble.radius}px`,
-                        backdropFilter: "blur(10px)",
-                        // border: "1px solid rgba(255, 255, 255, 0.5)",
-                        // padding: "10px",
-                    }}
-                >
-                    <figure
-                        //  className="flex-col justify-center items-center mx-auto"
-                        className={`${styles.bubble} ${styles.ball} relative`}
-                        style={{
-                            backgroundColor:
-                                bubble.text[0] > 0
-                                    ? "rgba(0, 255, 0, 0.2)"
-                                    : "rgba(255, 0, 0, 0.3)",
-                        }}
-                    >
-                        {/* <p className="text-xs mx-auto">{bubble?.text[1]}</p> */}
-                        <div
-                            className="text-xs absolute  w-full h-full  mx-auto text-center flex-col justify-center items-center"
-                            style={{
-                                // transform: "translateY(-50%) ",
-                                top: "40%",
-                                // left: "50%",
-                            }}
-                        >
-                            <p>{bubble?.symbol?.symbol}</p>
-                            <p>{bubble?.text[0]}%</p>
-                        </div>
-                    </figure>
-                </section>
+// function DrawerDemo({
+//     bubble,
+//     key,
+//     isModalOpen,
+//     setIsModalOpen,
+//     activeBubble,
+//     setActiveBubble,
+// }) {
+//     return (
+//         <Drawer key={key} className="">
+//             <DrawerTrigger asChild>
 
-                {/* <BubbleComponent /> */}
-            </DrawerTrigger>
-            <DrawerContent className="text-white bg-black  mx-auto opacity-85 flex justify-center items-center">
-                <CandlestickPage bubble={bubble} />
-            </DrawerContent>
-        </Drawer>
-    );
-}
+//                 {/* <BubbleComponent /> */}
+//             </DrawerTrigger>
+//             {/* <DrawerContent className="text-white bg-black  mx-auto opacity-85 flex justify-center items-center">
+//                 <CandlestickPage bubble={bubble} />
+//             </DrawerContent> */}
+//         </Drawer>
+//     );
+// }
 
 const FloatingBubbles = ({ method }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [activeBubble, setActiveBubble] = useState(null);
     const [coinArr, setCoinArr] = useState(data);
     const [field, setField] = useState("change_day");
     const sortedData = (data, field) => {
@@ -83,7 +49,7 @@ const FloatingBubbles = ({ method }) => {
             const changeB = Math.abs(b[field]);
             return changeB - changeA; // Sorting in descending order of magnitude
         });
-        console.log("Data sorted:", sortedArray);
+        // console.log("Data sorted:", sortedArray);
         return sortedArray;
     };
 
@@ -104,9 +70,9 @@ const FloatingBubbles = ({ method }) => {
         setCoinArr(sortedData(data, field));
     }, [field]);
 
-    useEffect(() => {
-        console.log("coinArr", coinArr);
-    }, [coinArr]);
+    // useEffect(() => {
+    //     console.log("coinArr", coinArr);
+    // }, [coinArr]);
     // Example usage:
     // const sortedData = sortDataByChange(data, "day");
     var numberOfBubbles = 50;
@@ -204,10 +170,65 @@ const FloatingBubbles = ({ method }) => {
         return () => clearInterval(intervalId);
     }, []);
     return (
-        <div className="relative w-[100vw]  h-[85vh]">
+        <div className="relative w-[100vw] flex justify-center items-center h-[85vh]">
             {bubbles.map((bubble, index) => (
-                <DrawerDemo bubble={bubble} key={index} />
+                // <DrawerDemo
+                //     bubble={bubble}
+                //     key={index}
+                //     isModalOpen={isModalOpen}
+                //     setIsModalOpen={setIsModalOpen}
+                //     setActiveBubble={setActiveBubble}
+                //     activeBubble={activeBubble}
+                // />
+                <section
+                    onClick={() => {
+                        setIsModalOpen(true);
+                        setActiveBubble(bubble.text[1]);
+                    }}
+                    key={index}
+                    // className={`floating-bubble    transition-all duration-500 ease-in-out `}
+                    className={`${styles.stage} cursor-pointer floating-bubble    transition-all duration-500 ease-in-out bg-transparent `}
+                    style={{
+                        top: bubble.top,
+                        left: bubble.left,
+
+                        backgroundColor: "transparent",
+                        width: `${bubble.radius}px`,
+                        height: `${bubble.radius}px`,
+                        backdropFilter: "blur(10px)",
+                    }}
+                >
+                    <figure
+                        //  className="flex-col justify-center items-center mx-auto"
+                        className={`${styles.bubble} ${styles.ball} relative`}
+                        style={{
+                            backgroundColor:
+                                bubble.text[0] > 0
+                                    ? "rgba(0, 255, 0, 0.2)"
+                                    : "rgba(255, 0, 0, 0.3)",
+                        }}
+                    >
+                        {/* <p className="text-xs mx-auto">{bubble?.text[1]}</p> */}
+                        <div
+                            className="text-xs absolute  w-full h-full  mx-auto text-center flex-col justify-center items-center"
+                            style={{
+                                // transform: "translateY(-50%) ",
+                                top: "40%",
+                                // left: "50%",
+                            }}
+                        >
+                            <p>{bubble?.symbol?.symbol}</p>
+                            <p>{bubble?.text[0]}%</p>
+                        </div>
+                    </figure>
+                </section>
             ))}
+
+            {isModalOpen && activeBubble && (
+                <div className="absolute w-[75%]  h-full text-white bg-black  mx-auto opacity-85 flex justify-center items-center">
+                    <CandlestickPage bubble={activeBubble} />
+                </div>
+            )}
         </div>
     );
 };
