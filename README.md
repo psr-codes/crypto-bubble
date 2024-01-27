@@ -40,7 +40,7 @@ Personalize the platform to align with your preferences, creating a tailored exp
 Quickly find and focus on specific cryptocurrencies of interest, streamlining information retrieval and analysis.
 
 ## Video Demos
-- [Video ]((https://youtu.be/I1nl7jY9VMM))
+- [Video 1]((https://youtu.be/I1nl7jY9VMM))
 
 ## Presentation (PPT)
 For a detailed overview of our project, please check out our [PowerPoint Presentation](https://docs.google.com/presentation/d/1zMQS4eyLGuNOtmT97g692U4B7F5zRqvjBhUvIi1alE/edit?usp=sharing).
@@ -51,10 +51,10 @@ Visit our website at [CryptoBubbles](https://crypto-bubble.vercel.app/).
 
 
 ## Tech Stack
-We have built Vital Roots using a diverse tech stack, including:
-- HTML
-- CSS
-- JavaScript
+We have built CryptoCurrency Tracker using a diverse tech stack, including:
+- 
+- 
+- 
 - Tailwind CSS
 - React
 - Next.js
