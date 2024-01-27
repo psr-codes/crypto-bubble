@@ -64,38 +64,11 @@ We have built Vital Roots using a diverse tech stack, including:
 - Vercel for Hosting
 
 ## Screenshots
-login screen:
-![login screen](/screenshots/login%20screen.png)
+CryptoCurrency Bubbles:
+![login screen](/Output/Pic1.png)
 
-google auth:
-![google auth](/screenshots/google%20auth.png)
-
-dashboard screen:
-![dashboard screen](/screenshots/dashboard.png)
-
-All Diseases:
-![All Diseases](/screenshots/all%20diseases.png)
-
-all Diseases -> Diseases:
-![diseases screens](/screenshots/diseases.png)
-
-All Diseases -> Diseases -> Disease Page:
-![Diseases Page](/screenshots/disease%20page.png)
-
-Charts:
-![Charts](/screenshots/charts%20page.png)
-
-Under Development:
-![Under Development](/screenshots/under%20development.png)
-
-Upload Disease, live [link](https://vitals-roots-backend.vercel.app/create-ctgs) with [github repo](https://github.com/lytcode404/vitals-roots-backend):
-![Upload Disease](/screenshots/upload%20disease.png)
-
-Data base firebase:
-![data base](/screenshots/data%20base.png)
-
-Spread sheet:
-![Spread Sheet](/screenshots/spread%20sheet.png)
+Table:
+![google auth](/Output/Pic2.png)
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
