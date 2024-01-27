@@ -74,7 +74,7 @@ const CryptoTable = () => {
                                             }`}
                                             key={ind}
                                         >
-                                            {i.change_year.toFixed(2)}%
+                                            {i.change_day.toFixed(2)}%
                                         </td>
                                     );
                                 } else {
@@ -92,7 +92,7 @@ const CryptoTable = () => {
                                             }`}
                                             key={ind}
                                         >
-                                            {i.change_year.toFixed(2)}%
+                                            {i.change_week.toFixed(2)}%
                                         </td>
                                     );
                                 } else {
@@ -110,7 +110,7 @@ const CryptoTable = () => {
                                             }`}
                                             key={ind}
                                         >
-                                            {i.change_year.toFixed(2)}%
+                                            {i.change_month.toFixed(2)}%
                                         </td>
                                     );
                                 } else {
