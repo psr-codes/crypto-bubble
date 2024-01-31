@@ -117,3 +117,50 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+clear
+
+disp('Enter the relative permittivity of the region');erl input('z > 0... \n>');
+
+if isempty(erl): er * 1 = 1 ; elseif erl<l: er * 1 = 11 end
+
+disp('Enterthe relative permittivity of the region'):
+
+er2 = input('z < 0... \n>');
+
+if isempty(er2); er * 2 = 1i elseif er2<1: er * 2 = 1z
+
+disp('Enter the side of the interface where the electric');
+
+side input('field is known (given)... 1n > 1if isempty(side); side =1; elseif side > 2 side = 2; end
+
+if side = 1 ;
+
+disp('Enter the electric field in side 1 in the ');E * 1 = (' form [Ex Ey Ez]... \n >');
+
+E * 1n =E1(3)*[0 0 1];
+
+E * 2n = Ein erl/er2;
+
+E * 1t =E1-E1n z
+
+E2t Elt:
+
+E * (2 = E * 2t + E * 2n)
+
+elseif side == 2;
+
+disp('Enter the electric field in side 2 in the ');epsilon * 2 = input' (form [Ex Ey Ez]... \n >');
+
+51t = E2t:
+
+E * (1 = E * 1t + E * ln(z))
+
+disp('Invalid specification, please re-try \n');
+
+else
+
+end
+
+disp(sprintf('The electric fields are '));
+
+disp(sprintf("\n El = (ld, id, d) V/m', E1(1), El (2), E1(311):disp(sprintf("\n E2 = (ed, 4d,&d) V/m', E2(1), E2(2), E2(3)));
